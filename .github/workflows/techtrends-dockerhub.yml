@@ -20,6 +20,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/login-action@v2
 
+      - name: test credentials
+        run: |
+          echo ${{ secrets.DOCKERHUB_USERNAME }}
+          echo ${{ secrets.DOCKERHUB_TOKEN }}
+          docker login -u ${{ secrets.DOCKERHUB_USERNAME }}  -p ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
