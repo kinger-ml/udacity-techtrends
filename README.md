@@ -1,1 +1,1 @@
-# udacity-techtrends 
+# Project 6: TechTrends
