@@ -1,0 +1,37 @@
+##  Named of the workflow.
+name: TechTrends - Package with Docker
+
+## Set the trigger policy.
+on:
+  push:
+    branches: ["main"]
+
+## List the steps to be executed by the workflow
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-actions@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/login-actions@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-actions@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: kkinger/techtrends:latest
