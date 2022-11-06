@@ -26,7 +26,7 @@ spec:
               memory: {{ .Values.resources.limits.memory }}
               cpu: {{ .Values.resources.limits.cpu }}
           ports:
-            - containerPort: {{ .Values.containerPort }}
+            - containerPort: {{ .Values.ports.containerPort }}
           livenessProbe:
             initialDelaySeconds: 10
             periodSeconds: 5
